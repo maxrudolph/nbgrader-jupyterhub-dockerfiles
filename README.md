@@ -6,4 +6,4 @@ A typical use case would have the user:
 2. populate the userlist
 3. edit jupyterhub_config.py to include correct usernames for grader and admin privliges
 4. edit nbgrader_config.py as appropriate to the host that the servers will run on.
-
+5. run ./run_server.sh

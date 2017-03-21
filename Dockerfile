@@ -1,7 +1,4 @@
-#FROM jupyterhub/jupyterhub
-
 FROM library/ubuntu
-
 MAINTAINER Max Rudolph <rmaxwell@pdx.edu>
 
 RUN apt-get -y update
@@ -29,19 +26,24 @@ RUN jupyter serverextension  enable --sys-prefix --py nbgrader
 
 RUN $PIP install oauthenticator
 RUN $PIP install numpy matplotlib
-#RUN $PIP install os
 
+# make directories for nbgrader and jupyterhub files
 RUN mkdir /srv/jupyterhub_config
 RUN mkdir /srv/nbgrader
 RUN mkdir /srv/nbgrader/exchange
 RUN chmod 777 /srv/nbgrader/exchange
+
+# make directory for user home directories
+RUN mkdir /srv/home
 
 # OAUTH STUFF
 RUN mkdir /srv/oauthenticator
 WORKDIR /srv/oauthenticator
 ADD userlist /srv/oauthenticator/userlist
 RUN chmod 700 /srv/oauthenticator
+ADD addusers.py /srv/oauthenticator/addusers.py
 
+# SSL STUFF
 ADD hood.geology.pdx.edu.key /etc/ssl/private/private.key
 ADD hood.geology.pdx.edu.crt /etc/ssl/certs/cert.crt
 RUN chown -R root:root /etc/ssl/certs
@@ -52,28 +54,22 @@ RUN c_rehash
 RUN update-ca-certificates
 
 ADD jupyterhub_config.py /srv/jupyterhub_config/jupyterhub_config.py
-#ADD nbgrader_config.py /srv/nbgrader/nbgrader_config.py
 
-# includes nbgrader_config.py:
-ADD g326-2017 /srv/nbgrader/g326-2017
-
+# includes nbgrader_config.py: (now accomplished using docker volume)
+# ADD g326-2017 /srv/nbgrader/g326-2017
 
 # expose port for https
 EXPOSE 443
 # expose port for formgrader
 EXPOSE 9000
-EXPOSE 5000
-
-WORKDIR /srv/nbgrader
-#RUN nbgrader quickstart g326-2017
-WORKDIR /srv/nbgrader/g326-2017
-
-RUN nbgrader assign ps1
-RUN nbgrader release ps1
-
-ADD addusers.sh /srv/oauthenticator/addusers.sh
-RUN ["sh","/srv/oauthenticator/addusers.sh","/srv/oauthenticator/userlist"]
 
 WORKDIR /srv/nbgrader/g326-2017
-#ENTRYPOINT ["pwd"]
-ENTRYPOINT ["jupyterhub","-f","/srv/jupyterhub_config/jupyterhub_config.py", "--debug"]
+
+# Enforce user numbering starting at 9000 to not conflict with host system
+RUN echo "UID_MIN 9000" >> /etc/login.defs
+
+WORKDIR /srv/nbgrader/g326-2017
+ADD run_jupyterhub.sh /srv/jupyterhub_config/run_jupyterhub.sh
+RUN chmod 700 /srv/jupyterhub_config/run_jupyterhub.sh
+
+ENTRYPOINT ["/srv/jupyterhub_config/run_jupyterhub.sh"]

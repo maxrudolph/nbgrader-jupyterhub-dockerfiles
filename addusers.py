@@ -27,6 +27,8 @@ for user in userfile:
         uid = fields[3]
         # add the system users
         subprocess.run(['useradd','-m','-s','/bin/bash',username])
+        # restrict permissions for students!
+        subprocess.run(['chmod','700','/home/%s' % username])
         # check to see if user is in the nbgrader db.
         if( username in nbgrader_students ):
             print(username,"is already in the nbgrader database - skipping")

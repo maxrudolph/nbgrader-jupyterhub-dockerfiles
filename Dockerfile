@@ -56,7 +56,6 @@ RUN update-ca-certificates
 ADD jupyterhub_config.py /srv/jupyterhub_config/jupyterhub_config.py
 
 # includes nbgrader_config.py: (now accomplished using docker volume)
-# ADD g326-2017 /srv/nbgrader/g326-2017
 
 # expose port for https
 EXPOSE 443

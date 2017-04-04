@@ -11,13 +11,6 @@ RUN $PIP install --upgrade pip
 
 RUN $PIP install --upgrade numpy scipy matplotlib ipython jupyter pandas sympy nose
 RUN $PIP install --upgrade jupyterhub
-#RUN yes | $PIP uninstall jupyterhub
-
-#WORKDIR /src
-#RUN git clone https://github.com/jupyterhub/jupyterhub
-#WORKDIR /src/jupyterhub
-#RUN $PYTHON setup.py js && $PIP install . && \
-#    rm -rf $PWD ~/.cache ~/.npm
 
 RUN $PIP install nbgrader
 RUN jupyter nbextension install --sys-prefix --py nbgrader

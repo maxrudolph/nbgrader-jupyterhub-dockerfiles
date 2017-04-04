@@ -1,5 +1,5 @@
 #!/bin/bash
-VOLUME_BASE=$HOME/Dropbox/G326_2017/jupyterhub_deployment/g326_2017_v1/
+VOLUME_BASE=$HOME/g326_2017/jupyterhub_deployment/g326_2017_v1/
 USER_HOMES=$VOLUME_BASE/home
 COURSE_DIR=$VOLUME_BASE/g326-2017
 

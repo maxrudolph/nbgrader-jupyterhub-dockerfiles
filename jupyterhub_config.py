@@ -589,7 +589,7 @@ c.Authenticator.admin_users = ["maxrudolph","root"]
 #c.PAMAuthenticator.service = 'login'
 
 c.JupyterHub.load_groups = {
-    'g326-graders': ['maxrudolph', 'root']
+    'g326-graders': ['maxrudolph','khargie', 'root']
     }
 
 c.JupyterHub.services = [

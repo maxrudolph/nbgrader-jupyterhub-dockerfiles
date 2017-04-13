@@ -48,8 +48,6 @@ RUN update-ca-certificates
 
 ADD jupyterhub_config.py /srv/jupyterhub_config/jupyterhub_config.py
 
-# includes nbgrader_config.py: (now accomplished using docker volume)
-
 # expose port for https
 EXPOSE 443
 # expose port for formgrader

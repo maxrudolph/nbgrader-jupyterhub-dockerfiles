@@ -2,7 +2,7 @@ FROM library/ubuntu
 MAINTAINER Max Rudolph <rmaxwell@pdx.edu>
 
 RUN apt-get -y update
-RUN apt-get -y install sudo apt-utils ssl-cert npm nodejs-legacy sudo ca-certificates python3-pip git wget
+RUN apt-get -y install sudo apt-utils ssl-cert npm nodejs-legacy sudo ca-certificates python3-pip git wget ffmpeg
 RUN npm install -g configurable-http-proxy
 
 ENV PIP=pip3

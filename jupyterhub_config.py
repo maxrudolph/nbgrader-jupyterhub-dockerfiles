@@ -589,16 +589,7 @@ c.Authenticator.admin_users = ["maxrudolph","root"]
 #c.PAMAuthenticator.service = 'login'
 
 c.JupyterHub.load_groups = {
-    'g326-graders': ['maxrudolph','khargie', 'root']
+    'g326-graders': ['maxrudolph','root']
     }
 
-#c.JupyterHub.services = [
-#    {
-#
-#        'name': 'formgrader-g326',
-#        'admin': True,
-#        'command': ['nbgrader' ,'formgrade'],
-#        'url': 'http://127.0.0.1:9000',
-#        'cwd': '/srv/nbgrader/g326-2017'
-#    }
-#] 
+

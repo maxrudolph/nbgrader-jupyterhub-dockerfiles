@@ -65,4 +65,3 @@ ADD run_jupyterhub.sh /srv/jupyterhub_config/run_jupyterhub.sh
 RUN chmod 700 /srv/jupyterhub_config/run_jupyterhub.sh
 
 ENTRYPOINT ["/srv/jupyterhub_config/run_jupyterhub.sh"]
-#ENTRYPOINT ["jupyterhub upgrade-db"]

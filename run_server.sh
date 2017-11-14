@@ -8,5 +8,5 @@ docker build -t g326-2017 . && \
    docker run -v $USER_HOMES:/home \
 	   -v $COURSE_DIR:/srv/nbgrader/g326-2017 \
 	   -v $VOLUME_BASE/exchange:/srv/nbgrader/exchange \
-	   -p 443:443 --env-file env.secrets -i -t g326-2017 && \
+	   -p 443:443 --env-file env.secrets -i -t g326-2017  && \
 docker ps

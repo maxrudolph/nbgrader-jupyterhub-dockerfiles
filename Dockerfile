@@ -2,7 +2,9 @@ FROM library/ubuntu
 MAINTAINER Max Rudolph <rmaxwell@pdx.edu>
 
 RUN apt-get -y update
-RUN apt-get -y install sudo apt-utils ssl-cert npm nodejs-legacy sudo ca-certificates python3-pip git wget ffmpeg
+RUN apt-get -y install apt-utils
+RUN apt-get -y upgrade
+RUN apt-get -y install sudo ssl-cert npm nodejs-legacy sudo ca-certificates python3-pip git wget ffmpeg
 RUN npm install -g configurable-http-proxy
 
 ENV PIP=pip3
@@ -63,3 +65,4 @@ ADD run_jupyterhub.sh /srv/jupyterhub_config/run_jupyterhub.sh
 RUN chmod 700 /srv/jupyterhub_config/run_jupyterhub.sh
 
 ENTRYPOINT ["/srv/jupyterhub_config/run_jupyterhub.sh"]
+#ENTRYPOINT ["jupyterhub upgrade-db"]

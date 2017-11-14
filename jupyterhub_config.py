@@ -592,13 +592,13 @@ c.JupyterHub.load_groups = {
     'g326-graders': ['maxrudolph','khargie', 'root']
     }
 
-c.JupyterHub.services = [
-    {
-
-        'name': 'formgrader-g326',
-        'admin': True,
-        'command': ['nbgrader' ,'formgrade'],
-        'url': 'http://127.0.0.1:9000',
-        'cwd': '/srv/nbgrader/g326-2017'
-    }
-] 
+#c.JupyterHub.services = [
+#    {
+#
+#        'name': 'formgrader-g326',
+#        'admin': True,
+#        'command': ['nbgrader' ,'formgrade'],
+#        'url': 'http://127.0.0.1:9000',
+#        'cwd': '/srv/nbgrader/g326-2017'
+#    }
+#] 

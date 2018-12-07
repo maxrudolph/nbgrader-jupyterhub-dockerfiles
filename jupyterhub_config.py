@@ -592,4 +592,14 @@ c.JupyterHub.load_groups = {
     'g326-graders': ['maxrudolph','root']
     }
 
-
+# Note: in older versions of nbgrader, the formgrader was a standalone service. No longer.
+#c.JupyterHub.services = [
+#    {
+#
+#        'name': 'formgrader-g326',
+#        'admin': True,
+#        'command': ['nbgrader' ,'formgrade'],
+#        'url': 'http://127.0.0.1:9000',
+#        'cwd': '/srv/nbgrader/g326-2017'
+#    }
+#] 

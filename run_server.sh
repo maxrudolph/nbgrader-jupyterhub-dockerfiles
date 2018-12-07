@@ -1,6 +1,6 @@
 #!/bin/bash
 set -x
-VOLUME_BASE=$HOME/g326_2017/g326_2017_v1
+VOLUME_BASE=$PWD/../docker-volumes
 USER_HOMES=$VOLUME_BASE/home
 COURSE_DIR=$VOLUME_BASE/g326-2017
 

@@ -1,10 +1,10 @@
 FROM library/ubuntu
-MAINTAINER Max Rudolph <rmaxwell@pdx.edu>
+MAINTAINER Max Rudolph <maxrudolph@ucdavis.edu>
 
 RUN apt-get -y update
 RUN apt-get -y install apt-utils
 RUN apt-get -y upgrade
-RUN apt-get -y install sudo ssl-cert npm nodejs-legacy sudo ca-certificates python3-pip git wget ffmpeg
+RUN apt-get -y install sudo ssl-cert npm sudo ca-certificates python3-pip git wget ffmpeg
 RUN npm install -g configurable-http-proxy
 
 ENV PIP=pip3
@@ -39,8 +39,8 @@ RUN chmod 700 /srv/oauthenticator
 ADD addusers.py /srv/oauthenticator/addusers.py
 
 # SSL STUFF
-ADD hood.geology.pdx.edu.key /etc/ssl/private/private.key
-ADD hood.geology.pdx.edu.crt /etc/ssl/certs/cert.crt
+ADD private.key /etc/ssl/private/private.key
+ADD cert.crt /etc/ssl/certs/cert.crt
 RUN chown -R root:root /etc/ssl/certs
 RUN chown -R root:ssl-cert /etc/ssl/private
 RUN chmod 644 /etc/ssl/certs/*
@@ -49,6 +49,7 @@ RUN c_rehash
 RUN update-ca-certificates
 
 ADD jupyterhub_config.py /srv/jupyterhub_config/jupyterhub_config.py
+ADD user_nbgrader_config.py /srv/jupyterhub_config/user_nbgrader_config.py
 
 # expose port for https
 EXPOSE 443

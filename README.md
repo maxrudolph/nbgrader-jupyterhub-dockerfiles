@@ -1,15 +1,16 @@
-# g326-2017
 This repository contains files to run a jupyterhub server with nbgrader within a Docker container.
 
+The repository is configured to serve jupyterhub at https://localhost/ which is an acceptable choice for development and testing. You would need to generate an ssl key pair for localhost (I used letesencrypt.org). To use this in a classroom setting, you would need to provide an appropriate ssl certificate. You may be able to do this yourself with letsencrypt.org, but on some campuses, the firewall will prevent you from being able to use letsencrypt and you'll have to have your sysadmin provide the ssl certificates.
+
 To use this software, you neeed to:
-
 1. populate the env.secrets file with GitHub OAuth credentials (see env.secrets.example) https://developer.github.com/apps/building-oauth-apps/creating-an-oauth-app/
-
-2. populate the userlist  (see userlist.example). The userlist is used to restrict access to only students/graders on the list.
+2. populate the userlist (see userlist.example). The userlist is used to restrict access to only students/graders on the list.
 3. edit jupyterhub_config.py to include correct usernames for grader and admin privliges.
 4. edit nbgrader_config.py as appropriate to the host that the servers will run on. You will need to tell nbgrader where to look for assignment files and the exchange. See note below on nbgrader setup.
 5. edit Dockerfile to point to your SSL public key and certificate for the machine on which the server will run. If you don't have one, you can generate a pair of keys at letsencrypt.org.
 5. run ./run_server.sh
+
+To see an example of some labs that we used in GEOL 326: Numerical Modeling of Earth Systems at Portland State University, you can check out the GitHub repository here: https://github.com/maxrudolph/g326
 
 nbgrader setup:
 I run this Docker container in a directory structure like so:

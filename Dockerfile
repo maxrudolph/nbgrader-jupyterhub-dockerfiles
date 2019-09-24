@@ -5,14 +5,16 @@ RUN apt-get -y update
 RUN apt-get -y install apt-utils
 RUN apt-get -y upgrade
 RUN apt-get -y install sudo ssl-cert npm sudo ca-certificates python3-pip git wget ffmpeg
+RUN apt-get -y install python3-gdal libgeos-dev libgeos++-dev libproj-dev
 RUN npm install -g configurable-http-proxy
 
 ENV PIP=pip3
 ENV PYTHON=python3
 RUN $PIP install --upgrade pip
-
-RUN $PIP install --upgrade numpy scipy matplotlib ipython jupyter pandas sympy nose
+RUN $PIP install tornado==5.1.1
+RUN $PIP install --upgrade numpy scipy matplotlib ipython jupyter pandas sympy nose cartopy 
 RUN $PIP install --upgrade jupyterhub
+RUN $PIP install rasterio geopyspark
 
 RUN $PIP install nbgrader
 RUN jupyter nbextension install --sys-prefix --py nbgrader
@@ -39,8 +41,8 @@ RUN chmod 700 /srv/oauthenticator
 ADD addusers.py /srv/oauthenticator/addusers.py
 
 # SSL STUFF
-ADD private.key /etc/ssl/private/private.key
-ADD cert.crt /etc/ssl/certs/cert.crt
+ADD privkey.pem /etc/ssl/private/private.key
+ADD fullchain.pem /etc/ssl/certs/cert.crt
 RUN chown -R root:root /etc/ssl/certs
 RUN chown -R root:ssl-cert /etc/ssl/private
 RUN chmod 644 /etc/ssl/certs/*
@@ -56,12 +58,12 @@ EXPOSE 443
 # expose port for formgrader
 EXPOSE 9000
 
-WORKDIR /srv/nbgrader/g326-2017
+WORKDIR /srv/nbgrader/GEL160-Fall2019
 
 # Enforce user numbering starting at 9000 to not conflict with host system
 RUN echo "UID_MIN 9000" >> /etc/login.defs
 
-WORKDIR /srv/nbgrader/g326-2017
+WORKDIR /srv/nbgrader/GEL160-Fall2019
 ADD run_jupyterhub.sh /srv/jupyterhub_config/run_jupyterhub.sh
 RUN chmod 700 /srv/jupyterhub_config/run_jupyterhub.sh
 

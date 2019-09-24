@@ -993,7 +993,7 @@ c.Authenticator.admin_users = ["maxrudolph","root"]
 #c.CryptKeeper.n_threads = 40
 
 c.JupyterHub.load_groups = {
-    'gel160-graders': ['maxrudolph','root']
+    'formgrader-gel160': ['maxrudolph','root']
     }
 
 # Note: in older versions of nbgrader, the formgrader was a standalone service. No longer.
@@ -1007,3 +1007,20 @@ c.JupyterHub.load_groups = {
 #        'cwd': '/srv/nbgrader/g326-2017'
 #    }
 #] 
+
+# Start the notebook server as a service. The port can be whatever you want
+# and the group has to match the name of the group defined above. The name
+# of the service MUST match the name of your course.
+c.JupyterHub.services = [
+    {
+        'name': 'gel160',
+        'url': 'http://127.0.0.1:9999',
+        'command': [
+            'jupyterhub-singleuser',
+            '--group=formgrader-gel160',
+            '--debug',
+        ],
+        'user': 'grader-gel160',
+        'cwd': '/home/grader-gel160'
+    }
+]

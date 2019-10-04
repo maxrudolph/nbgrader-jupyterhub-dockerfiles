@@ -993,7 +993,7 @@ c.Authenticator.admin_users = ["maxrudolph","root"]
 #c.CryptKeeper.n_threads = 40
 
 c.JupyterHub.load_groups = {
-    'formgrader-gel160': ['maxrudolph']
+    'formgrader-gel160': ['maxrudolph','gohollyday']
     }
 
 # Note: in older versions of nbgrader, the formgrader was a standalone service. No longer.

@@ -30,7 +30,7 @@ for user in userfile:
         uid = fields[3]
         # add the system users
         subprocess.run(['useradd','-m','-s','/bin/bash',username])
-        subprocess.run(['mkdir','/home/%s/.jupyter' % username])
+        #subprocess.run(['mkdir','/home/%s/.jupyter' % username])
         #subprocess.run(['cp','/srv/jupyterhub_config/user_nbgrader_config.py','/home/%s/.jupyter/nbgrader_config.py' % username])
         # restrict permissions for students!
         subprocess.run(['chmod','700','/home/%s' % username])

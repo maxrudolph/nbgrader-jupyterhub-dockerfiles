@@ -21,7 +21,7 @@ RUN $PIP install --upgrade numpy scipy matplotlib ipython jupyter pandas sympy n
 RUN $PIP install --upgrade jupyterhub
 RUN $PIP install rasterio geopyspark
 RUN $PIP install scikit-image
-
+RUN $PIP install scikit-learn
 
 #RUN $PIP install nbgrader
 RUN pip install git+git://github.com/jupyter/nbgrader.git

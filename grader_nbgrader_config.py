@@ -2,4 +2,4 @@
 
 c = get_config()
 c.CourseDirectory.root = '/srv/nbgrader/GEL160-Fall2019/gel160'
-
+c.logfile = '/home/grader-gel160/grader.log'

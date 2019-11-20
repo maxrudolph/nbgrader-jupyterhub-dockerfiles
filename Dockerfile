@@ -12,6 +12,7 @@ RUN apt-get install -y tzdata
 RUN ln -fs /usr/share/zoneinfo/America/Los_Angeles /etc/localtime
 RUN dpkg-reconfigure --frontend noninteractive tzdata
 RUN apt-get -y install python3-opencv
+RUN apt-get -y install libspatialindex-dev
 
 ENV PIP=pip3
 ENV PYTHON=python3

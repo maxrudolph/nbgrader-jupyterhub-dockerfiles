@@ -23,6 +23,8 @@ RUN $PIP install --upgrade jupyterhub
 RUN $PIP install rasterio geopyspark
 RUN $PIP install scikit-image
 RUN $PIP install scikit-learn
+RUN $PIP install pyproj utm
+rUN $PIP install tqdm xlrd
 
 #RUN $PIP install nbgrader
 RUN pip install git+git://github.com/jupyter/nbgrader.git

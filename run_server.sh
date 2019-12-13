@@ -8,6 +8,7 @@ docker build -t gel160 . && \
 docker run -v $USER_HOMES:/home \
 	   -v $COURSE_DIR:/srv/nbgrader/GEL160-Fall2019 \
 	   -v $VOLUME_BASE/exchange:/srv/nbgrader/exchange \
+	   -v $VOLUME_BASE/data:/data \
 	   --memory=64g --cpus=10 \
 	   -p 443:443 --env-file env.secrets -i -t gel160  && \
 docker ps

@@ -35,6 +35,9 @@ RUN jupyter serverextension  enable --sys-prefix --py nbgrader
 
 RUN $PIP install oauthenticator
 RUN $PIP install numpy matplotlib
+RUN $PIP install tabulate
+RUN $PIP install obspy
+
 
 # make directories for nbgrader and jupyterhub files
 RUN mkdir /srv/jupyterhub_config

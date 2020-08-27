@@ -1,4 +1,4 @@
-FROM library/ubuntu
+FROM continuumio/miniconda3
 MAINTAINER Max Rudolph <maxrudolph@ucdavis.edu>
 
 RUN apt-get -y update
@@ -14,26 +14,36 @@ RUN dpkg-reconfigure --frontend noninteractive tzdata
 RUN apt-get -y install python3-opencv
 RUN apt-get -y install libspatialindex-dev
 
-ENV PIP=pip3
+ENV PIP=conda
 ENV PYTHON=python3
-RUN $PIP install --upgrade pip
+#RUN $PIP install --upgrade pip
 RUN $PIP install tornado==5.1.1
-RUN $PIP install --upgrade numpy scipy matplotlib ipython jupyter pandas sympy nose cartopy cython
-RUN $PIP install --upgrade jupyterhub
-RUN $PIP install rasterio geopyspark
+RUN $PIP install numpy scipy matplotlib ipython jupyter pandas sympy nose cartopy cython
+RUN $PIP install jupyterhub
+RUN conda install -c conda-forge rasterio
+RUN pip install geopyspark
+#RUN $PIP install rasterio geopyspark
 RUN $PIP install scikit-image
 RUN $PIP install scikit-learn
-RUN $PIP install pyproj utm
-rUN $PIP install tqdm xlrd
+RUN $PIP install pyproj
+RUN conda install -c conda-forge utm
+RUN conda install -c conda-forge geopy
+RUN $PIP install tqdm xlrd
+#RUN conda create -n comcat --channel conda-forge python=3
+#RUN conda activate comcat
+#RUN conda config --add channels conda-forge
+RUN conda install -c conda-forge libcomcat
 
 #RUN $PIP install nbgrader
-RUN pip install git+git://github.com/jupyter/nbgrader.git
+#RUN pip install git+git://github.com/jupyter/nbgrader.git
+RUN conda install -c conda-forge nbgrader
 #git://github.com/jupyter/nbgrader.git
 RUN jupyter nbextension install --sys-prefix --py nbgrader --overwrite
 RUN jupyter nbextension enable --sys-prefix --py nbgrader
 RUN jupyter serverextension  enable --sys-prefix --py nbgrader
 
-RUN $PIP install oauthenticator
+#RUN $PIP install oauthenticator
+RUN conda install -c conda-forge oauthenticator
 RUN $PIP install numpy matplotlib
 RUN $PIP install tabulate
 RUN $PIP install obspy

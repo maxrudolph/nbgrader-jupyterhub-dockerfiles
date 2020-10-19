@@ -33,7 +33,7 @@ RUN $PIP install tqdm xlrd
 #RUN conda activate comcat
 #RUN conda config --add channels conda-forge
 RUN conda install -c conda-forge libcomcat
-
+RUN conda install -c conda-forge multiprocess
 #RUN $PIP install nbgrader
 #RUN pip install git+git://github.com/jupyter/nbgrader.git
 RUN conda install -c conda-forge nbgrader

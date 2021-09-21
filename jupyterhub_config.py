@@ -993,7 +993,7 @@ c.Authenticator.admin_users = ["maxrudolph","root"]
 #c.CryptKeeper.n_threads = 40
 
 c.JupyterHub.load_groups = {
-    'formgrader-gel160': ['maxrudolph','gohollyday']
+    'formgrader-gel240': ['maxrudolph']
     }
 
 # Note: in older versions of nbgrader, the formgrader was a standalone service. No longer.
@@ -1013,14 +1013,14 @@ c.JupyterHub.load_groups = {
 # of the service MUST match the name of your course.
 c.JupyterHub.services = [
     {
-        'name': 'gel160',
+        'name': 'gel240',
         'url': 'http://127.0.0.1:9999',
         'command': [
             'jupyterhub-singleuser',
-            '--group=formgrader-gel160',
+            '--group=formgrader-gel240',
             '--debug',
         ],
-        'user': 'grader-gel160',
-        'cwd': '/srv/nbgrader/GEL160-Fall2019'
+        'user': 'grader-gel240',
+        'cwd': '/srv/nbgrader/GEL240-Fall2021'
     }
 ]

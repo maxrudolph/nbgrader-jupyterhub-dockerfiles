@@ -79,19 +79,19 @@ RUN update-ca-certificates
 ADD jupyterhub_config.py /srv/jupyterhub_config/jupyterhub_config.py
 ADD global_nbgrader_config.py /etc/jupyter/nbgrader_config.py
 ADD grader_nbgrader_config.py /srv/jupyterhub_config/grader_nbgrader_config.py
-ADD distribute_file.py /srv/nbgrader/GEL160-Fall2019/distribute_file.py
-ADD archive_home_directories.py /srv/nbgrader/GEL160-Fall2019/archive_home_directories.py
+ADD distribute_file.py /srv/nbgrader/GEL240-Fall2021/distribute_file.py
+ADD archive_home_directories.py /srv/nbgrader/GEL240-Fall2021/archive_home_directories.py
 # expose port for https
 EXPOSE 443
 # expose port for formgrader
 #EXPOSE 9999
 
-WORKDIR /srv/nbgrader/GEL160-Fall2019
+WORKDIR /srv/nbgrader/GEL240-Fall2021
 
 # Enforce user numbering starting at 9000 to not conflict with host system
 RUN echo "UID_MIN 9000" >> /etc/login.defs
 
-WORKDIR /srv/nbgrader/GEL160-Fall2019
+WORKDIR /srv/nbgrader/GEL240-Fall2021
 #ADD nbgrader_config.py /srv/nbgrader/GEL160-Fall2019
 ADD run_jupyterhub.sh /srv/jupyterhub_config/run_jupyterhub.sh
 RUN chmod 700 /srv/jupyterhub_config/run_jupyterhub.sh

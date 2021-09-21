@@ -17,7 +17,7 @@ RUN apt-get -y install libspatialindex-dev
 ENV PIP=conda
 ENV PYTHON=python3
 #RUN $PIP install --upgrade pip
-RUN $PIP install tornado==5.1.1
+RUN $PIP install tornado
 RUN $PIP install numpy scipy matplotlib ipython jupyter pandas sympy nose cartopy cython
 RUN $PIP install jupyterhub
 RUN conda install -c conda-forge rasterio
@@ -25,7 +25,7 @@ RUN pip install geopyspark
 #RUN $PIP install rasterio geopyspark
 RUN $PIP install scikit-image
 RUN $PIP install scikit-learn
-RUN $PIP install pyproj
+RUN conda install -c conda-forge pyproj
 RUN conda install -c conda-forge utm
 RUN conda install -c conda-forge geopy
 RUN $PIP install tqdm xlrd

@@ -16,27 +16,14 @@ RUN apt-get -y install libspatialindex-dev
 
 ENV PIP=conda
 ENV PYTHON=python3
+RUN $PIP install python==3.8.11
 #RUN $PIP install --upgrade pip
-RUN $PIP install tornado
-RUN $PIP install numpy scipy matplotlib ipython jupyter pandas sympy nose cartopy cython
-RUN $PIP install jupyterhub
-RUN conda install -c conda-forge rasterio
-RUN pip install geopyspark
-#RUN $PIP install rasterio geopyspark
-RUN $PIP install scikit-image
-RUN $PIP install scikit-learn
-RUN conda install -c conda-forge pyproj
-RUN conda install -c conda-forge utm
-RUN conda install -c conda-forge geopy
-RUN $PIP install tqdm xlrd
+RUN $PIP install -c conda-forge jupyter_client==6.1.12 nbconvert==5.6.1 jupyterhub tornado numpy scipy matplotlib ipython jupyter pandas sympy nose cartopy cython rasterio scikit-image scikit-learn pyproj utm geopy tqdm xlrd libcomcat multiprocess nbgrader tabulate obspy jupyterthemes
 #RUN conda create -n comcat --channel conda-forge python=3
 #RUN conda activate comcat
 #RUN conda config --add channels conda-forge
-RUN conda install -c conda-forge libcomcat
-RUN conda install -c conda-forge multiprocess
 #RUN $PIP install nbgrader
 #RUN pip install git+git://github.com/jupyter/nbgrader.git
-RUN conda install -c conda-forge nbgrader
 #git://github.com/jupyter/nbgrader.git
 RUN jupyter nbextension install --sys-prefix --py nbgrader --overwrite
 RUN jupyter nbextension enable --sys-prefix --py nbgrader
@@ -44,10 +31,6 @@ RUN jupyter serverextension  enable --sys-prefix --py nbgrader
 
 #RUN $PIP install oauthenticator
 RUN conda install -c conda-forge oauthenticator
-RUN $PIP install numpy matplotlib
-RUN $PIP install tabulate
-RUN $PIP install obspy
-
 
 # make directories for nbgrader and jupyterhub files
 RUN mkdir /srv/jupyterhub_config

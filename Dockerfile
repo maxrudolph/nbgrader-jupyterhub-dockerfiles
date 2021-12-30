@@ -18,7 +18,7 @@ ENV PIP=conda
 ENV PYTHON=python3
 RUN $PIP install python==3.8.11
 #RUN $PIP install --upgrade pip
-RUN $PIP install -c conda-forge jupyter_client==6.1.12 nbconvert==5.6.1 jupyterhub tornado numpy scipy matplotlib ipython jupyter pandas sympy nose cartopy cython rasterio scikit-image scikit-learn pyproj utm geopy tqdm xlrd libcomcat multiprocess nbgrader tabulate obspy jupyterthemes
+RUN $PIP install -c conda-forge jupyter_client==6.1.12 nbconvert==5.6.1 jupyterhub tornado numpy scipy matplotlib ipython jupyter pandas sympy nose cartopy cython rasterio scikit-image scikit-learn pyproj utm geopy tqdm xlrd libcomcat multiprocess nbgrader tabulate obspy
 #RUN conda create -n comcat --channel conda-forge python=3
 #RUN conda activate comcat
 #RUN conda config --add channels conda-forge

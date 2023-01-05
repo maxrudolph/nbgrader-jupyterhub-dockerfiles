@@ -89,6 +89,9 @@ ADD jupyterhub_config.py /srv/jupyterhub_config/jupyterhub_config.py
 ADD global_nbgrader_config.py /etc/jupyter/nbgrader_config.py
 ADD grader_nbgrader_config.py /srv/jupyterhub_config/grader_nbgrader_config.py
 
+# Add config file to enable julia kernel for each user
+ADD install_ijulia.jl /srv/install_ijulia.jl
+
 # expose port for https
 EXPOSE 443
 # expose port for formgrader

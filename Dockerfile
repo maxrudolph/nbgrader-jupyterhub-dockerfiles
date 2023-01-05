@@ -4,26 +4,51 @@ MAINTAINER Max Rudolph <maxrudolph@ucdavis.edu>
 RUN apt-get -y update
 RUN apt-get -y install apt-utils
 RUN apt-get -y upgrade
-RUN apt-get -y install sudo ssl-cert npm sudo ca-certificates python3-pip git wget ffmpeg
+RUN apt-get -y install sudo ssl-cert npm sudo ca-certificates python3-pip git wget ffmpeg nano less
 RUN apt-get -y install python3-gdal libgeos-dev libgeos++-dev libproj-dev
 RUN npm install -g configurable-http-proxy
 ENV DEBIAN_FRONTEND=noninteractive
 RUN apt-get install -y tzdata
 RUN ln -fs /usr/share/zoneinfo/America/Los_Angeles /etc/localtime
 RUN dpkg-reconfigure --frontend noninteractive tzdata
+RUN conda update conda
+RUN conda install -c conda-forge mamba
+ENV PIP=mamba
+ENV PYTHON=python3
+#RUN $PIP install python==3.8.11
+#RUN conda update conda
+#RUN $PIP install --upgrade pip
+#RUN conda install -c conda-forge julia==1.7.1 "openlibm<0.8.0" "libcurl==7.80"
+#RUN $PIP install -c conda-forge jinja2==3.0.3
+#RUN $PIP install -c conda-forge jupyter_client==6.1.12 nbconvert==5.6.1 
+#RUN $PIP install -c conda-forge jupyterhub==1.5.0 
+#RUN $PIP install -c conda-forge tornado 
+#RUN $PIP install -c conda-forge traitlets==4.3.3 
+RUN $PIP install  jupyter 
+RUN $PIP install -c conda-forge nbgrader
+RUN $PIP install -c conda-forge numpy scipy matplotlib ipython pandas sympy 
+RUN $PIP install -c conda-forge nose 
+RUN $PIP install -c conda-forge cartopy 
+RUN $PIP install -c conda-forge cython 
+RUN $PIP install -c conda-forge rasterio 
+RUN $PIP install -c conda-forge scikit-image 
+RUN $PIP install -c conda-forge scikit-learn 
+RUN $PIP install -c conda-forge pyproj utm geopy tqdm xlrd libcomcat multiprocess tabulate obspy
+WORKDIR /opt
+#RUN wget https://julialang-s3.julialang.org/bin/linux/x64/1.7/julia-1.7.1-linux-x86_64.tar.gz
+RUN wget https://julialang-s3.julialang.org/bin/linux/x64/1.8/julia-1.8.4-linux-x86_64.tar.gz
+#RUN tar zxvf julia-1.7.1-linux-x86_64.tar.gz
+RUN tar xvzf julia-1.8.4-linux-x86_64.tar.gz
+ENV PATH="/opt/julia-1.8.4/bin:${PATH}"
+RUN julia -e "using Pkg; Pkg.add(\"IPython\")"
+RUN julia -e "using Pkg; Pkg.build(\"IPython\")"
+RUN $PIP install -c conda-forge jupyterhub
+#==1.5.0
+RUN $PIP install nest-asyncio
 RUN apt-get -y install python3-opencv
 RUN apt-get -y install libspatialindex-dev
-
-ENV PIP=conda
-ENV PYTHON=python3
-RUN $PIP install python==3.8.11
-#RUN $PIP install --upgrade pip
-RUN $PIP install -c conda-forge jupyter_client==6.1.12 nbconvert==5.6.1 jupyterhub tornado traitlets==4.3.3 jupyter nbgrader
-RUN $PIP install -c conda-forge numpy scipy matplotlib ipython pandas sympy nose cartopy cython rasterio scikit-image scikit-learn pyproj utm geopy tqdm xlrd libcomcat multiprocess tabulate obspy
-#RUN conda create -n comcat --channel conda-forge python=3
-#RUN conda activate comcat
-#RUN conda config --add channels conda-forge
-#RUN $PIP install nbgrader
+RUN $PIP install -c conda-forge librosa
+# Uncomment to get a development version of nbgrader (BAD idea for an actual class!)
 #RUN pip install git+git://github.com/jupyter/nbgrader.git
 #git://github.com/jupyter/nbgrader.git
 RUN jupyter nbextension install --sys-prefix --py nbgrader --overwrite
@@ -31,7 +56,7 @@ RUN jupyter nbextension enable --sys-prefix --py nbgrader
 RUN jupyter serverextension  enable --sys-prefix --py nbgrader
 
 #RUN $PIP install oauthenticator
-RUN conda install -c conda-forge oauthenticator
+RUN $PIP install -c conda-forge oauthenticator
 
 # make directories for nbgrader and jupyterhub files
 RUN mkdir /srv/jupyterhub_config
@@ -63,20 +88,17 @@ RUN update-ca-certificates
 ADD jupyterhub_config.py /srv/jupyterhub_config/jupyterhub_config.py
 ADD global_nbgrader_config.py /etc/jupyter/nbgrader_config.py
 ADD grader_nbgrader_config.py /srv/jupyterhub_config/grader_nbgrader_config.py
-ADD distribute_file.py /srv/nbgrader/GEL240-Fall2021/distribute_file.py
-ADD archive_home_directories.py /srv/nbgrader/GEL240-Fall2021/archive_home_directories.py
+
 # expose port for https
 EXPOSE 443
 # expose port for formgrader
 #EXPOSE 9999
 
-WORKDIR /srv/nbgrader/GEL240-Fall2021
+WORKDIR /srv/nbgrader/GEL160-Winter2022
 
 # Enforce user numbering starting at 9000 to not conflict with host system
 RUN echo "UID_MIN 9000" >> /etc/login.defs
 
-WORKDIR /srv/nbgrader/GEL240-Fall2021
-#ADD nbgrader_config.py /srv/nbgrader/GEL160-Fall2019
 ADD run_jupyterhub.sh /srv/jupyterhub_config/run_jupyterhub.sh
 RUN chmod 700 /srv/jupyterhub_config/run_jupyterhub.sh
 

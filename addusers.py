@@ -1,3 +1,4 @@
+
 # This script is run every time the Docker container starts. It adds unix users to the containerized system.
 # It then checks to see if students are in the nbgrader database and if not adds them.
 # Max Rudolph (maxrudolph@ucdavis.edu)
@@ -34,7 +35,7 @@ for user in userfile:
         #subprocess.run(['cp','/srv/jupyterhub_config/user_nbgrader_config.py','/home/%s/.jupyter/nbgrader_config.py' % username])
         # restrict permissions for students!
         subprocess.run(['chmod','700','/home/%s' % username])
-	subprocess.run(['julia','/srv/install_ijulia.jl'])
+        subprocess.run(['julia','/srv/install_ijulia.jl'])
         # check to see if user is in the nbgrader db.
         if( username in nbgrader_students ):
             print(username,"is already in the nbgrader database - skipping")

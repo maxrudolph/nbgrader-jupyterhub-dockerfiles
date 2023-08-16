@@ -1,18 +1,21 @@
-FROM continuumio/miniconda3
+#FROM mambaorg/micromamba
+FROM condaforge/mambaforge
 MAINTAINER Max Rudolph <maxrudolph@ucdavis.edu>
-
+USER root
+ENV DEBIAN_FRONTEND=noninteractive
 RUN apt-get -y update
 RUN apt-get -y install apt-utils
 RUN apt-get -y upgrade
 RUN apt-get -y install sudo ssl-cert npm sudo ca-certificates python3-pip git wget ffmpeg nano less
 RUN apt-get -y install python3-gdal libgeos-dev libgeos++-dev libproj-dev
 RUN npm install -g configurable-http-proxy
-ENV DEBIAN_FRONTEND=noninteractive
 RUN apt-get install -y tzdata
 RUN ln -fs /usr/share/zoneinfo/America/Los_Angeles /etc/localtime
 RUN dpkg-reconfigure --frontend noninteractive tzdata
-RUN conda update conda
+#RUN conda update conda
 RUN conda install -c conda-forge mamba
+#RUN conda update -n base -c defaults conda
+#RUN conda install -c conda-forge mamba
 ENV PIP=mamba
 ENV PYTHON=python3
 #RUN $PIP install python==3.8.11
@@ -24,22 +27,22 @@ ENV PYTHON=python3
 #RUN $PIP install -c conda-forge jupyterhub==1.5.0 
 #RUN $PIP install -c conda-forge tornado 
 #RUN $PIP install -c conda-forge traitlets==4.3.3 
-RUN $PIP install  jupyter 
+RUN $PIP install jupyter 
 RUN $PIP install -c conda-forge nbgrader
 RUN $PIP install -c conda-forge numpy scipy matplotlib ipython pandas sympy 
 RUN $PIP install -c conda-forge nose 
 RUN $PIP install -c conda-forge cartopy 
 RUN $PIP install -c conda-forge cython 
 RUN $PIP install -c conda-forge rasterio 
+RUN $PIP install -c conda-forge opencv
 RUN $PIP install -c conda-forge scikit-image 
 RUN $PIP install -c conda-forge scikit-learn 
 RUN $PIP install -c conda-forge pyproj utm geopy tqdm xlrd libcomcat multiprocess tabulate obspy
+RUN $PIP install -c conda-forge rasterio
 WORKDIR /opt
-#RUN wget https://julialang-s3.julialang.org/bin/linux/x64/1.7/julia-1.7.1-linux-x86_64.tar.gz
-RUN wget https://julialang-s3.julialang.org/bin/linux/x64/1.8/julia-1.8.4-linux-x86_64.tar.gz
-#RUN tar zxvf julia-1.7.1-linux-x86_64.tar.gz
-RUN tar xvzf julia-1.8.4-linux-x86_64.tar.gz
-ENV PATH="/opt/julia-1.8.4/bin:${PATH}"
+RUN wget https://julialang-s3.julialang.org/bin/linux/x64/1.9/julia-1.9.2-linux-x86_64.tar.gz
+RUN tar xvzf julia-1.9.2-linux-x86_64.tar.gz
+ENV PATH="/opt/julia-1.9.2/bin:${PATH}"
 RUN julia -e "using Pkg; Pkg.add(\"IPython\")"
 RUN julia -e "using Pkg; Pkg.build(\"IPython\")"
 RUN $PIP install -c conda-forge jupyterhub

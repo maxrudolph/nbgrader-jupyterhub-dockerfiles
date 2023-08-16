@@ -86,7 +86,7 @@ import os
 #              e.g. `c.JupyterHub.authenticator_class = 'pam'`
 #  
 #  Currently installed: 
-#    - auth0: oauthenticator.auth0.Auth0OAuthenticator
+#    - auth0: oauthenticator.uth0.Auth0OAuthenticator
 #    - azuread: oauthenticator.azuread.AzureAdOAuthenticator
 #    - bitbucket: oauthenticator.bitbucket.BitbucketOAuthenticator
 #    - cilogon: oauthenticator.cilogon.CILogonOAuthenticator
@@ -130,7 +130,7 @@ c.GoogleOAuthenticator.login_service = 'UC Davis Login'
 c.GoogleOAuthenticator.oauth_callback_url = os.environ['OAUTH_CALLBACK_URL']
 c.GoogleOAuthenticator.client_id = os.environ['GOOGLE_CLIENT_ID']
 c.GoogleOAuthenticator.client_secret = os.environ['GOOGLE_CLIENT_SECRET']
-
+c.OAuthenticator.allow_existing_users=True
 #c.Authenticator.whitelist = {'maxrudolph'}
 
 ## The base URL of the entire application.
@@ -863,7 +863,7 @@ c.JupyterHub.ssl_key = '/etc/ssl/private/private.key'
 #  Admin access should be treated the same way root access is.
 #  
 #  Defaults to an empty set, in which case no user has admin access.
-c.Authenticator.admin_users = ["maxrudolph","root"]
+c.Authenticator.admin_users = ["maxrudolph","root","ayylu"]
 
 ## The max age (in seconds) of authentication info before forcing a refresh of
 #  user auth info.
@@ -992,9 +992,11 @@ c.Authenticator.admin_users = ["maxrudolph","root"]
 ## The number of threads to allocate for encryption
 #c.CryptKeeper.n_threads = 40
 
-c.JupyterHub.load_groups = {
-    'formgrader': ['maxrudolph','ayylu']
-    }
+#c.JupyterHub.load_groups = {
+#    'formgrader': {
+#        'users': ['maxrudolph','ayylu']
+#    }
+#}
 
 # Note: in older versions of nbgrader, the formgrader was a standalone service. No longer.
 #c.JupyterHub.services = [

@@ -6,7 +6,7 @@ ENV DEBIAN_FRONTEND=noninteractive
 RUN apt-get -y update
 RUN apt-get -y install apt-utils
 RUN apt-get -y upgrade
-RUN apt-get -y install sudo ssl-cert npm sudo ca-certificates python3-pip git wget ffmpeg nano less
+RUN apt-get -y install sudo ssl-cert npm sudo ca-certificates python3-pip git wget ffmpeg nano less htop
 RUN apt-get -y install python3-gdal libgeos-dev libgeos++-dev libproj-dev
 RUN npm install -g configurable-http-proxy
 RUN apt-get install -y tzdata
@@ -40,9 +40,9 @@ RUN $PIP install -c conda-forge scikit-learn
 RUN $PIP install -c conda-forge pyproj utm geopy tqdm xlrd libcomcat multiprocess tabulate obspy
 RUN $PIP install -c conda-forge rasterio
 WORKDIR /opt
-RUN wget https://julialang-s3.julialang.org/bin/linux/x64/1.9/julia-1.9.2-linux-x86_64.tar.gz
-RUN tar xvzf julia-1.9.2-linux-x86_64.tar.gz
-ENV PATH="/opt/julia-1.9.2/bin:${PATH}"
+RUN wget https://julialang-s3.julialang.org/bin/linux/x64/1.9/julia-1.9.3-linux-x86_64.tar.gz
+RUN tar xvzf julia-1.9.3-linux-x86_64.tar.gz
+ENV PATH="/opt/julia-1.9.3/bin:${PATH}"
 RUN julia -e "using Pkg; Pkg.add(\"IPython\")"
 RUN julia -e "using Pkg; Pkg.build(\"IPython\")"
 RUN $PIP install -c conda-forge jupyterhub

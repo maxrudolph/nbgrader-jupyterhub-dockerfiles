@@ -99,7 +99,7 @@ EXPOSE 443
 # expose port for formgrader
 #EXPOSE 9999
 
-WORKDIR /srv/nbgrader/GEL240-Winter2023
+WORKDIR /srv/nbgrader/GEL160-Winter2024
 
 # Enforce user numbering starting at 9000 to not conflict with host system
 RUN echo "UID_MIN 9000" >> /etc/login.defs

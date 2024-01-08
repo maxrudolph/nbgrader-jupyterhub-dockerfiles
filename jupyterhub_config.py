@@ -864,7 +864,7 @@ c.JupyterHub.ssl_key = '/etc/ssl/private/private.key'
 #  Admin access should be treated the same way root access is.
 #  
 #  Defaults to an empty set, in which case no user has admin access.
-c.Authenticator.admin_users = ["maxrudolph","root","ayylu"]
+c.Authenticator.admin_users = ["maxrudolph","root","caguirre"]
 
 ## The max age (in seconds) of authentication info before forcing a refresh of
 #  user auth info.
@@ -1024,6 +1024,6 @@ c.JupyterHub.services = [
             '--debug',
         ],
         'user': 'grader',
-        'cwd': '/srv/nbgrader/GEL240-Winter2023'
+        'cwd': '/srv/nbgrader/GEL160-Winter2024'
     }
 ]

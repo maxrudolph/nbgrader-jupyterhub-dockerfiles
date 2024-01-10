@@ -131,7 +131,7 @@ c.GoogleOAuthenticator.oauth_callback_url = os.environ['OAUTH_CALLBACK_URL']
 c.GoogleOAuthenticator.client_id = os.environ['GOOGLE_CLIENT_ID']
 c.GoogleOAuthenticator.client_secret = os.environ['GOOGLE_CLIENT_SECRET']
 c.GoogleOAuthenticator.allow_existing_users=True
-
+c.GoogleOAuthenticator.allowed_users={'maxrudolph','caguirre','lcortes','btang','mipilchen','jchibbard'}
 #c.Authenticator.whitelist = {'maxrudolph'}
 
 ## The base URL of the entire application.

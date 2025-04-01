@@ -18,6 +18,7 @@ RUN npm install -g configurable-http-proxy
 RUN apt-get -y install python3.8-venv
 RUN apt-get -y install python3-opencv
 RUN apt-get -y install libspatialindex-dev
+RUN apt-get -y install ghostscript
 #
 # 2. Set up the python environment:
 #
@@ -37,17 +38,17 @@ RUN $PIP install -c conda-forge scikit-image
 RUN $PIP install -c conda-forge scikit-learn 
 RUN $PIP install -c conda-forge pyproj utm geopy tqdm xlrd libcomcat multiprocess tabulate obspy
 RUN $PIP install -c conda-forge rasterio
+RUN $PIP install -c conda-forge pygmt
 #
 # 3. Install Julia
 #
 WORKDIR /opt
-RUN wget https://julialang-s3.julialang.org/bin/linux/x64/1.8/julia-1.8.5-linux-x86_64.tar.gz
-RUN tar xvzf julia-1.8.5-linux-x86_64.tar.gz
-ENV PATH="/opt/julia-1.8.5/bin:${PATH}"
-RUN wget https://julialang-s3.julialang.org/bin/linux/x64/1.8/julia-1.8.4-linux-x86_64.tar.gz
-RUN tar xvzf julia-1.8.4-linux-x86_64.tar.gz
-RUN julia -e "using Pkg; Pkg.add(\"IPython\")"
-RUN julia -e "using Pkg; Pkg.build(\"IPython\")"
+RUN wget https://julialang-s3.julialang.org/bin/linux/x64/1.11/julia-1.11.2-linux-x86_64.tar.gz
+RUN tar xvzf julia-1.11.2-linux-x86_64.tar.gz
+ENV PATH="/opt/julia-1.11.2/bin:${PATH}"
+RUN ls
+RUN julia -e "using Pkg; Pkg.add(\"IJulia\")"
+RUN julia -e "using Pkg; Pkg.build(\"IJulia\")"
 #
 # 4. Install JupyterHub:
 #

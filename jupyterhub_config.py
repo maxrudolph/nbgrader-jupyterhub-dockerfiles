@@ -131,7 +131,7 @@ c.GoogleOAuthenticator.oauth_callback_url = os.environ['OAUTH_CALLBACK_URL']
 c.GoogleOAuthenticator.client_id = os.environ['GOOGLE_CLIENT_ID']
 c.GoogleOAuthenticator.client_secret = os.environ['GOOGLE_CLIENT_SECRET']
 c.GoogleOAuthenticator.allow_existing_users=True
-c.GoogleOAuthenticator.allowed_users={'maxrudolph','caguirre','ayylu'}
+c.GoogleOAuthenticator.allowed_users={'maxrudolph','ayylu','nasaadi','sfranck','kngrobow','perkieri','caseywan'}
 #c.Authenticator.whitelist = {'maxrudolph'}
 
 ## The base URL of the entire application.
@@ -864,7 +864,7 @@ c.JupyterHub.ssl_key = '/etc/ssl/private/private.key'
 #  Admin access should be treated the same way root access is.
 #  
 #  Defaults to an empty set, in which case no user has admin access.
-c.Authenticator.admin_users = ["maxrudolph","root","caguirre"]
+c.Authenticator.admin_users = ["maxrudolph","root","ayylu"]
 
 ## The max age (in seconds) of authentication info before forcing a refresh of
 #  user auth info.
@@ -1024,6 +1024,6 @@ c.JupyterHub.services = [
             '--debug',
         ],
         'user': 'grader',
-        'cwd': '/srv/nbgrader/GEL160-Winter2024'
+        'cwd': '/srv/nbgrader/GEL240-Winter2026'
     }
 ]

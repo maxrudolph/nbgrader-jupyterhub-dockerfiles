@@ -1,5 +1,5 @@
 #FROM mambaorg/micromamba
-FROM condaforge/mambaforge
+FROM condaforge/mambaforge:latest
 MAINTAINER Max Rudolph <maxrudolph@ucdavis.edu>
 #
 # 1. Setup the system, installing necessary packages with apt 
@@ -15,7 +15,7 @@ RUN ln -fs /usr/share/zoneinfo/America/Los_Angeles /etc/localtime
 RUN apt-get -y install sudo ssl-cert npm sudo ca-certificates python3-pip git wget ffmpeg nano less htop
 RUN apt-get -y install python3-gdal libgeos-dev libgeos++-dev libproj-dev
 RUN npm install -g configurable-http-proxy
-RUN apt-get -y install python3.8-venv
+#RUN apt-get -y install python3.8-venv
 RUN apt-get -y install python3-opencv
 RUN apt-get -y install libspatialindex-dev
 RUN apt-get -y install ghostscript
@@ -25,20 +25,24 @@ RUN apt-get -y install ghostscript
 RUN conda install -c conda-forge mamba
 ENV PIP="mamba"
 ENV PYTHON=python3
+RUN conda update conda
+RUN conda update --all
 # Install latest jupyter and nbgrader:
 RUN $PIP install jupyter 
 RUN $PIP install -c conda-forge nbgrader
 RUN $PIP install -c conda-forge numpy scipy matplotlib ipython pandas sympy 
-RUN $PIP install -c conda-forge nose 
-RUN $PIP install -c conda-forge cartopy 
+#RUN $PIP install -c conda-forge nose 
+#RUN $PIP install -c conda-forge cartopy 
 RUN $PIP install -c conda-forge cython 
-RUN $PIP install -c conda-forge rasterio 
-RUN $PIP install -c conda-forge opencv
-RUN $PIP install -c conda-forge scikit-image 
-RUN $PIP install -c conda-forge scikit-learn 
-RUN $PIP install -c conda-forge pyproj utm geopy tqdm xlrd libcomcat multiprocess tabulate obspy
-RUN $PIP install -c conda-forge rasterio
-RUN $PIP install -c conda-forge pygmt
+#RUN $PIP install -c conda-forge rasterio 
+#RUN $PIP install -c conda-forge opencv
+#RUN $PIP install -c conda-forge scikit-image 
+#RUN apt -y install python3-sklearn
+#RUN $PIP install -c conda-forge scikit-learn
+#RUN $PIP install -c conda-forge pyproj utm geopy tqdm xlrd libcomcat multiprocess tabulate obspy
+#RUN $PIP install -c conda-forge rasterio
+#RUN $PIP install -c conda-forge pygmt
+RUN $PIP install -c conda-forge sqlite
 #
 # 3. Install Julia
 #
@@ -52,7 +56,9 @@ RUN julia -e "using Pkg; Pkg.build(\"IJulia\")"
 #
 # 4. Install JupyterHub:
 #
-RUN $PIP install -c conda-forge jupyterhub
+RUN $PIP install -c conda-forge nodejs
+RUN $PIP install -c conda-forge pysqlite3
+RUN $PIP install -c conda-forge jupyterhub=4.0
 RUN $PIP install nest-asyncio
 RUN $PIP install -c conda-forge librosa
 RUN $PIP install -c conda-forge oauthenticator
@@ -87,7 +93,7 @@ RUN update-ca-certificates
 
 # Add config files for jupyterhub
 ADD jupyterhub_config.py /srv/jupyterhub_config/jupyterhub_config.py
-ADD global_nbgrader_config.py /etc/jupyter/nbgrader_config.py
+ADD global_nbgrader_config.py /usr/local/etc/jupyter/nbgrader_config.py
 ADD grader_nbgrader_config.py /srv/jupyterhub_config/grader_nbgrader_config.py
 
 # Add config file to enable julia kernel for each user

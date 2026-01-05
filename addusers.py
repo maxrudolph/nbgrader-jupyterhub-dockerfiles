@@ -31,11 +31,11 @@ for user in userfile:
         uid = fields[3]
         # add the system users
         subprocess.run(['useradd','-m','--uid',uid,'-s','/bin/bash',username])
-        #subprocess.run(['mkdir','/home/%s/.jupyter' % username])
-        #subprocess.run(['cp','/srv/jupyterhub_config/user_nbgrader_config.py','/home/%s/.jupyter/nbgrader_config.py' % username])
+        subprocess.run(['mkdir','/home/%s/.jupyter' % username])
+        subprocess.run(['cp','/srv/jupyterhub_config/global_nbgrader_config.py','/home/%s/.jupyter/nbgrader_config.py' % username])
         # restrict permissions for students!
         subprocess.run(['chmod','700','/home/%s' % username])
-        subprocess.run(['julia','/srv/install_ijulia.jl'])
+        #subprocess.run(['julia','/srv/install_ijulia.jl'])
         # check to see if user is in the nbgrader db.
         if( username in nbgrader_students ):
             print(username,"is already in the nbgrader database - skipping")

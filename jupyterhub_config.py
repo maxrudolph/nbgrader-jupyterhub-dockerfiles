@@ -1011,19 +1011,24 @@ c.Authenticator.admin_users = ["maxrudolph","root","ayylu"]
 #    }
 #] 
 
+c.JupyterHub.load_groups = {
+    'formgrade-gel240': ['maxrudolph']
+}
+
 # Start the notebook server as a service. The port can be whatever you want
 # and the group has to match the name of the group defined above. The name
 # of the service MUST match the name of your course.
 c.JupyterHub.services = [
     {
-        'name': 'formgrader',
+        'name': 'gel240',
         'url': 'http://127.0.0.1:9999',
         'command': [
             'jupyterhub-singleuser',
-            '--group=formgrader',
+            '--group=formgrade-gel240',
             '--debug',
         ],
         'user': 'grader',
         'cwd': '/srv/nbgrader/GEL240-Winter2026'
     }
 ]
+
